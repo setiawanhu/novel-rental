@@ -6,7 +6,7 @@
 package rental;
 
 import javax.swing.JOptionPane;
-import models.User;
+import model.User;
 import repository.UserRepository;
 
 public class Login extends javax.swing.JFrame {
@@ -117,15 +117,22 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
+        login();
     }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
+        login();
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-        // TODO add your handling code here:
+        login();
+    }//GEN-LAST:event_btnLoginMouseClicked
+
+    /**
+     * Handle a login attempt
+     * 
+     */
+    private void login(){
         String username = txtUsername.getText();
         String password = String.valueOf(txtPassword.getPassword());
         
@@ -143,8 +150,8 @@ public class Login extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(null, "Wrong username / password", "Login", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_btnLoginMouseClicked
-
+    }
+    
     /**
      * @param args the command line arguments
      */
