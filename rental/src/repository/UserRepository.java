@@ -130,6 +130,55 @@ public class UserRepository {
     }
     
     /**
+     * Find user by id from storage
+     * 
+     * @param id int
+     * @return User
+     */
+    public static User findByUsername(String usr){
+        setConnection();
+        
+        User user = null;
+        
+        try{
+            Statement statement = con.createStatement();
+            
+            //Query statement
+            String query = "SELECT user.id, role.name, user.name, username, password, " +
+                            "email, dob, phone, address FROM user " +
+                            "INNER JOIN role ON user.role_id = role.id " + 
+                            "WHERE user.username = ?";
+
+            //Create mysql prepared statement
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, usr);
+            
+            //Execute the prepared statement
+            ResultSet result = preparedStatement.executeQuery();
+            
+            result.next();
+            
+            int userId = result.getInt(1);
+            String role = result.getString(2);
+            String name = result.getString(3);
+            String username = result.getString(4);
+            String password = result.getString(5);
+            String email = result.getString(6);
+            String dob = result.getString(7);
+            String phone = result.getString(8);
+            String address = result.getString(9);
+
+            user = new User(userId, role, name, username, password, email, dob, phone, address);
+            
+            con.close();
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return user;
+    }
+    
+    /**
      * Store a new user to the storage
      * 
      * @param user User
