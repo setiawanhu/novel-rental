@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models;
+package model;
 
 /**
  *
  * @author setiawanhu
  */
 public class User {
-    int id;
-    String role;
-    String name;
-    String username;
-    String password;
-    String email;
-    String dob;
-    String phone;
-    String address;
+    private int id;
+    private String role;
+    private String name;
+    private String username;
+    private String password;
+    private String email;
+    private String dob;
+    private String phone;
+    private String address;
 
     public User(int id, String role, String name, String username, String password, String email, String dob, String phone, String address) {
         this.id = id;
