@@ -3,24 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models;
+package model;
 
 import java.util.Date;
 
 public class Novel {
-    int id;
-    String title;
-    String author;
-    String language;
-    String publisher;
-    String publicationDate;
-    int rentPrice;
-    int pages;
-    String isbn;
-    String kondisi;
-    String status;
-    String createdAt;
-    String updatedAt;
+    private int id;
+    private String title;
+    private String author;
+    private String language;
+    private String publisher;
+    private String publicationDate;
+    private int rentPrice;
+    private int pages;
+    private String isbn;
+    private String kondisi;
+    private String status;
+    private String createdAt;
+    private String updatedAt;
 
     /**
      * The novel model constructor
