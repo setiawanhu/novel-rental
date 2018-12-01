@@ -18,12 +18,18 @@ import repository.UserRepository;
  * @author setiawanhu
  */
 public class MasterUser extends javax.swing.JFrame {
-
+    private User authUser;
+    
     /**
      * Creates new form MasterUser
      */
-    public MasterUser() {
+    public MasterUser(){
         initComponents();
+    }
+    
+    public MasterUser(User authUser) {
+        initComponents();
+        this.authUser = authUser;
         getUsers();
     }
 
@@ -36,7 +42,6 @@ public class MasterUser extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCalendar1 = new com.toedter.calendar.JCalendar();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUser = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -62,6 +67,9 @@ public class MasterUser extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
+        jLabel11 = new javax.swing.JLabel();
+        txtSearch = new javax.swing.JTextField();
+        btmSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -149,12 +157,12 @@ public class MasterUser extends javax.swing.JFrame {
 
         dateDob.setDateFormatString("yyyy-MM-dd");
         dateDob.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 dateDobAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
@@ -190,65 +198,88 @@ public class MasterUser extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setText("Search:");
+
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+
+        btmSearch.setText("Search");
+        btmSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btmSearchMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                                    .addComponent(txtId)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel10))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtUsername)
-                                    .addComponent(cmbRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                                    .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                                    .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                                    .addComponent(dateDob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtPassword)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(75, 75, 75))))
-                        .addGap(28, 28, 28)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                            .addComponent(txtId)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtUsername)
+                            .addComponent(cmbRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                            .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                            .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                            .addComponent(dateDob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtPassword)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(75, 75, 75))))
+                .addGap(28, 28, 28)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel9)))
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btmSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                        .addComponent(jLabel9))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(69, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addGap(18, 18, 18)
+                .addContainerGap(75, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11)
+                        .addComponent(btmSearch)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,11 +341,6 @@ public class MasterUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        dispose();
-        new Home().setVisible(true);
-    }//GEN-LAST:event_formWindowClosing
-
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         delete();
     }//GEN-LAST:event_btnDeleteActionPerformed
@@ -366,6 +392,19 @@ public class MasterUser extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblUserMouseClicked
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        dispose();
+        new Home(authUser).setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        search();
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void btmSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btmSearchMouseClicked
+        search();
+    }//GEN-LAST:event_btmSearchMouseClicked
+
     /**
      * Creating a new user record
      * 
@@ -394,6 +433,7 @@ public class MasterUser extends javax.swing.JFrame {
             User user = new User(id, role, name, username, password, email, dob, phone, address);
             if(UserRepository.create(user)){
                 JOptionPane.showMessageDialog(null, "Insert successful", "Insert", JOptionPane.INFORMATION_MESSAGE);
+                txtId.setText("");
                 txtName.setText("");
                 txtUsername.setText("");
                 txtPassword.setText("");
@@ -414,20 +454,24 @@ public class MasterUser extends javax.swing.JFrame {
      * 
      */
     private void delete(){
-        if(UserRepository.destroy(Integer.parseInt(txtId.getText()))){
-            JOptionPane.showMessageDialog(null, "Delete successful", "Delete", JOptionPane.INFORMATION_MESSAGE);
-            txtId.setText("");
-            txtName.setText("");
-            txtUsername.setText("");
-            txtPassword.setText("");
-            txtEmail.setText("");
-            txtPhone.setText("");
-            txtAddress.setText("");
-            
-            getUsers();
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Oops, something's wrong", "Delete", JOptionPane.INFORMATION_MESSAGE);
+        try{
+            if(UserRepository.destroy(Integer.parseInt(txtId.getText()))){
+                JOptionPane.showMessageDialog(null, "Delete successful", "Delete", JOptionPane.INFORMATION_MESSAGE);
+                txtId.setText("");
+                txtName.setText("");
+                txtUsername.setText("");
+                txtPassword.setText("");
+                txtEmail.setText("");
+                txtPhone.setText("");
+                txtAddress.setText("");
+
+                getUsers();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Oops, something's wrong", "Delete", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Please choose a record", "Delete", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
@@ -436,7 +480,12 @@ public class MasterUser extends javax.swing.JFrame {
      * 
      */
     private void update(){
-        int id = Integer.parseInt(txtId.getText());
+        int id;
+        try{
+            id = Integer.parseInt(txtId.getText());
+        } catch(Exception e){
+            id = 0;
+        }
         String role = cmbRole.getSelectedItem().toString();
         String name = txtName.getText();
         String username = txtUsername.getText();
@@ -447,7 +496,7 @@ public class MasterUser extends javax.swing.JFrame {
         String phone = txtPhone.getText();
         String address = txtAddress.getText();
         
-        if(role.equals("") || name.equals("") || username.equals("") || password.equals("") || email.equals("") || dob.equals("") || phone.equals("") || address.equals("")){
+        if(id == 0 || role.equals("") || name.equals("") || username.equals("") || password.equals("") || email.equals("") || dob.equals("") || phone.equals("") || address.equals("")){
             JOptionPane.showMessageDialog(null, "Please fill the empty field(s)", "Update", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
@@ -459,6 +508,37 @@ public class MasterUser extends javax.swing.JFrame {
             }
             else {
                 JOptionPane.showMessageDialog(null, "Oops, something's wrong", "Update", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+    
+    /**
+     * Search users by username
+     * 
+     */
+    private void search(){
+        String username = txtSearch.getText();
+        
+        if(username.equals("")){
+            getUsers();
+        }
+        else{
+            ArrayList<User> users = UserRepository.searchByUsername(username);
+        
+            DefaultTableModel model = (DefaultTableModel)tblUser.getModel();
+            model.setRowCount(0);
+            
+            Object[] row = new Object[8];
+            for(int i = 0; i < users.size(); i++){
+                row[0] = users.get(i).getName();
+                row[1] = users.get(i).getRole();
+                row[2] = users.get(i).getUsername();
+                row[3] = users.get(i).getEmail();
+                row[4] = users.get(i).getDob();
+                row[5] = users.get(i).getPhone();
+                row[6] = users.get(i).getAddress();
+
+                model.addRow(row);
             }
         }
     }
@@ -559,14 +639,15 @@ public class MasterUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btmSearch;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cmbRole;
     private com.toedter.calendar.JDateChooser dateDob;
-    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -584,6 +665,7 @@ public class MasterUser extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPhone;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
