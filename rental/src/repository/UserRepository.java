@@ -14,8 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.Novel;
-import models.User;
+import model.User;
 
 public class UserRepository {
     private static Connection con;
@@ -67,7 +66,6 @@ public class UserRepository {
                 User user = new User(userId, role, name, username, password, email, dob, phone, address);
                 
                 users.add(user);
-                System.out.println(user.getName());
             }
             
             con.close();
