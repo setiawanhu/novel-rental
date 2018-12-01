@@ -141,7 +141,7 @@ public class Login extends javax.swing.JFrame {
         if(user != null){
             if(password.equals(user.getPassword())){
                 Login.this.setVisible(false);
-                new Home().setVisible(true);
+                new Home(user).setVisible(true);
             }     
             else{
                 JOptionPane.showMessageDialog(null, "Wrong username / password", "Login", JOptionPane.INFORMATION_MESSAGE);
