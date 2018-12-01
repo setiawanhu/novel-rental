@@ -177,7 +177,7 @@ public class UserRepository {
     }
     
     /**
-     * Find genre by name keyword from storage
+     * Find user by name keyword from storage
      * 
      * @param usr String
      * @return ArrayList<User>
