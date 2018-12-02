@@ -8,6 +8,10 @@ public class Member {
     String address;
     String dob;
 
+    public Member(){
+        
+    }
+    
     public Member(int id, String name, String email, String phone, String address, String dob) {
         this.id = id;
         this.name = name;

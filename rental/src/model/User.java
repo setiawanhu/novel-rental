@@ -20,6 +20,10 @@ public class User {
     private String phone;
     private String address;
 
+    public User(){
+        
+    }
+    
     public User(int id, String role, String name, String username, String password, String email, String dob, String phone, String address) {
         this.id = id;
         this.role = role;
