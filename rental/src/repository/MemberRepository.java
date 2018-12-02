@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Member;
-import model.User;
 
 public class MemberRepository {
     private static Connection con;
@@ -109,6 +108,49 @@ public class MemberRepository {
         }
         
         return member;
+    }
+    
+    /**
+     * Find member by name keyword from storage
+     * 
+     * @param id String
+     * @return ArrayList<Member>
+     */
+    public static ArrayList<Member> findById(String id){
+        setConnection();
+        
+        ArrayList<Member> members = new ArrayList<>();
+        
+        try{
+            Statement statement = con.createStatement();
+            
+            //Query statement
+            String query = "SELECT * FROM member WHERE id LIKE ?";
+
+            //Create mysql prepared statement
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, "%"+id+"%");
+            
+            //Execute the prepared statement
+            ResultSet result = preparedStatement.executeQuery();
+            
+            while(result.next()){
+                int memberId = result.getInt(1);
+                String name = result.getString(2);
+                String email = result.getString(3);
+                String phone = result.getString(4);
+                String address = result.getString(5);
+                String dob = result.getString(6);
+    
+                members.add(new Member(memberId, name, email, phone, address, dob));
+            }
+
+            con.close();
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return members;
     }
     
     /**
