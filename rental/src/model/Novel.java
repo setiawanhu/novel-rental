@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Novel {
@@ -21,12 +22,13 @@ public class Novel {
     private String status;
     private String createdAt;
     private String updatedAt;
+    private ArrayList<Genre> genres = new ArrayList<>();
 
     /**
      * The novel model constructor
      * 
      */
-    public Novel(){   
+    public Novel(){
     }
 
     /**
@@ -43,9 +45,8 @@ public class Novel {
      * @param isbn
      * @param kondisi
      * @param status
-     * @param createdAt
-     * @param updatedAt 
      */
+    
     public Novel(int id, String title, String author, String language, String publisher, String publicationDate, int rentPrice, int pages, String isbn, String kondisi, String status, String createdAt, String updatedAt) {
         this.id = id;
         this.title = title;
@@ -60,6 +61,20 @@ public class Novel {
         this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public Novel(int id, String title, String author, String language, String publisher, String publicationDate, int rentPrice, int pages, String isbn, String kondisi, String status) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.language = language;
+        this.publisher = publisher;
+        this.publicationDate = publicationDate;
+        this.rentPrice = rentPrice;
+        this.pages = pages;
+        this.isbn = isbn;
+        this.kondisi = kondisi;
+        this.status = status;
     }
     
     public int getId() {
@@ -165,6 +180,13 @@ public class Novel {
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
-    
+
+    public ArrayList<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(ArrayList<Genre> genres) {
+        this.genres = genres;
+    }
     
 }
