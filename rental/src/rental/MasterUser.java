@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Log;
 import model.User;
+import repository.LogRepository;
 import repository.UserRepository;
 
 /**
@@ -432,6 +434,8 @@ public class MasterUser extends javax.swing.JFrame {
         else{
             User user = new User(id, role, name, username, password, email, dob, phone, address);
             if(UserRepository.create(user)){
+                LogRepository.create(new Log(0, authUser.getId(), "User", "INSERT"));
+                
                 JOptionPane.showMessageDialog(null, "Insert successful", "Insert", JOptionPane.INFORMATION_MESSAGE);
                 txtId.setText("");
                 txtName.setText("");
@@ -456,6 +460,8 @@ public class MasterUser extends javax.swing.JFrame {
     private void delete(){
         try{
             if(UserRepository.destroy(Integer.parseInt(txtId.getText()))){
+                LogRepository.create(new Log(0, authUser.getId(), "User", "DELETE"));
+                
                 JOptionPane.showMessageDialog(null, "Delete successful", "Delete", JOptionPane.INFORMATION_MESSAGE);
                 txtId.setText("");
                 txtName.setText("");
@@ -502,6 +508,8 @@ public class MasterUser extends javax.swing.JFrame {
         else{
             User user = new User(id, role, name, username, password, email, dob, phone, address);
             if(UserRepository.update(id, user)){
+                LogRepository.create(new Log(0, authUser.getId(), "User", "UPDATE"));
+                
                 JOptionPane.showMessageDialog(null, "Update successful", "Update", JOptionPane.INFORMATION_MESSAGE);
                 
                 getUsers();

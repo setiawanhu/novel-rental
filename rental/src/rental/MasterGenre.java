@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rental;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Genre;
+import model.Log;
 import model.User;
 import repository.GenreRepository;
+import repository.LogRepository;
 
-/**
- *
- * @author setiawanhu
- */
 public class MasterGenre extends javax.swing.JFrame {
     private User authUser;
     
@@ -74,7 +67,15 @@ public class MasterGenre extends javax.swing.JFrame {
             new String [] {
                 "Name", "Created At", "Updated At"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblGenre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblGenreMouseClicked(evt);
@@ -207,8 +208,7 @@ public class MasterGenre extends javax.swing.JFrame {
                                     .addComponent(btnInsert)
                                     .addComponent(btnDelete))
                                 .addGap(18, 18, 18)
-                                .addComponent(btnUpdate)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btnUpdate))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addComponent(jSeparator1))))
@@ -275,6 +275,8 @@ public class MasterGenre extends javax.swing.JFrame {
             Genre genre = new Genre(id, name);
             
             if(GenreRepository.create(genre)){
+                LogRepository.create(new Log(0, authUser.getId(), "Genre", "INSERT"));
+                
                 JOptionPane.showMessageDialog(null, "Insert successful", "Insert", JOptionPane.INFORMATION_MESSAGE);
                 
                 txtId.setText("");
@@ -295,6 +297,9 @@ public class MasterGenre extends javax.swing.JFrame {
     private void delete(){
         try{
             if(GenreRepository.destroy(Integer.parseInt(txtId.getText()))){
+                //Store to the log
+                LogRepository.create(new Log(0, authUser.getId(), "Genre", "DELETE"));
+                
                 JOptionPane.showMessageDialog(null, "Delete successful", "Delete", JOptionPane.INFORMATION_MESSAGE);
 
                 txtId.setText("");
@@ -330,6 +335,9 @@ public class MasterGenre extends javax.swing.JFrame {
             Genre genre = new Genre(id, name);
             
             if(GenreRepository.update(id, genre)){
+                //Store to the log
+                LogRepository.create(new Log(0, authUser.getId(), "Genre", "UPDATE"));
+                
                 JOptionPane.showMessageDialog(null, "Update successful", "Update", JOptionPane.INFORMATION_MESSAGE);
                 
                 getGenres();
@@ -357,7 +365,7 @@ public class MasterGenre extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel)tblGenre.getModel();
             model.setRowCount(0);
             
-            Object[] row = new Object[8];
+            Object[] row = new Object[3];
             for(int i = 0; i < genres.size(); i++){
                 row[0] = genres.get(i).getName();
                 row[1] = genres.get(i).getCreatedAt();
@@ -380,7 +388,7 @@ public class MasterGenre extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)tblGenre.getModel();
         model.setRowCount(0);
         
-        Object[] row = new Object[8];
+        Object[] row = new Object[3];
         for(int i = 0; i < genres.size(); i++){
             row[0] = genres.get(i).getName();
             row[1] = genres.get(i).getCreatedAt();
@@ -398,6 +406,18 @@ public class MasterGenre extends javax.swing.JFrame {
         
         txtId.setText(String.valueOf(genre.getId()));
         txtName.setText(genre.getName());
+    }
+    
+    /**
+     * Checking the user's type
+     * 
+     */
+    private void checkAuthorization(){
+        if (authUser.getRole().equals("Pegawai")){
+            btnDelete.setVisible(false);
+            btnInsert.setVisible(false);
+            btnUpdate.setVisible(false);
+        }
     }
     
     /**
