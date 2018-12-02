@@ -423,21 +423,26 @@ public class MasterMember extends javax.swing.JFrame {
      */
     private void destroy(){
         try{
-            if(MemberRepository.destroy(Integer.parseInt(txtId.getText()))){
-                LogRepository.create(new Log(0, authUser.getId(), "Member", "DELETE"));
-                
-                JOptionPane.showMessageDialog(null, "Delete successful", "Delete", JOptionPane.INFORMATION_MESSAGE);
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure want to delete this record?","Delete",dialogButton);
+            
+            if(dialogResult == JOptionPane.YES_OPTION){
+                if(MemberRepository.destroy(Integer.parseInt(txtId.getText()))){
+                    LogRepository.create(new Log(0, authUser.getId(), "Member", "DELETE"));
 
-                txtId.setText("");
-                txtName.setText("");
-                txtEmail.setText("");
-                txtPhone.setText("");
-                txtAddress.setText("");
+                    JOptionPane.showMessageDialog(null, "Delete successful", "Delete", JOptionPane.INFORMATION_MESSAGE);
 
-                getMembers();
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Oops, something's wrong", "Delete", JOptionPane.INFORMATION_MESSAGE);
+                    txtId.setText("");
+                    txtName.setText("");
+                    txtEmail.setText("");
+                    txtPhone.setText("");
+                    txtAddress.setText("");
+
+                    getMembers();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Oops, something's wrong", "Delete", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "Please choose a record", "Delete", JOptionPane.INFORMATION_MESSAGE);
