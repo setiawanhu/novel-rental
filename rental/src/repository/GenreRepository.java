@@ -167,7 +167,6 @@ public class GenreRepository {
             
             //Create mysql prepared statement
             PreparedStatement preparedStatement = con.prepareStatement(query);
-            
             preparedStatement.setString(1, genre.getName());
             
             //Execute the query
