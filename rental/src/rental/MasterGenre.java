@@ -296,19 +296,25 @@ public class MasterGenre extends javax.swing.JFrame {
      */
     private void delete(){
         try{
-            if(GenreRepository.destroy(Integer.parseInt(txtId.getText()))){
-                //Store to the log
-                LogRepository.create(new Log(0, authUser.getId(), "Genre", "DELETE"));
-                
-                JOptionPane.showMessageDialog(null, "Delete successful", "Delete", JOptionPane.INFORMATION_MESSAGE);
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure want to delete this record?","Delete",dialogButton);
+            
+            if(dialogResult == JOptionPane.YES_OPTION){
+                if(GenreRepository.destroy(Integer.parseInt(txtId.getText()))){
 
-                txtId.setText("");
-                txtName.setText("");
+                    //Store to the log
+                    LogRepository.create(new Log(0, authUser.getId(), "Genre", "DELETE"));
 
-                getGenres();
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Oops, something's wrong", "Delete", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Delete successful", "Delete", JOptionPane.INFORMATION_MESSAGE);
+
+                    txtId.setText("");
+                    txtName.setText("");
+
+                    getGenres();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Oops, something's wrong", "Delete", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "Please choose a record", "Delete", JOptionPane.INFORMATION_MESSAGE);
