@@ -47,8 +47,10 @@ public class Home extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnGenre = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
+        btnLog = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
         header = new javax.swing.JPanel();
-        exit = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JLabel();
         main = new javax.swing.JPanel();
         home_page = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -83,8 +85,8 @@ public class Home extends javax.swing.JFrame {
         btnMember.setBackground(new java.awt.Color(102, 255, 255));
         btnMember.setForeground(new java.awt.Color(255, 255, 255));
         btnMember.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnMemberMousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMemberMouseClicked(evt);
             }
         });
         btnMember.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -164,43 +166,47 @@ public class Home extends javax.swing.JFrame {
         jLabel14.setText("Master Data Genre");
         btnGenre.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 190, 30));
 
+        btnLog.setBackground(new java.awt.Color(102, 255, 255));
+        btnLog.setForeground(new java.awt.Color(255, 255, 255));
+        btnLog.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLogMouseClicked(evt);
+            }
+        });
+        btnLog.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel15.setText("Logs");
+        btnLog.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 170, 30));
+
         javax.swing.GroupLayout left_SidePanelLayout = new javax.swing.GroupLayout(left_SidePanel);
         left_SidePanel.setLayout(left_SidePanelLayout);
         left_SidePanelLayout.setHorizontalGroup(
             left_SidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(left_SidePanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, left_SidePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(left_SidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(left_SidePanelLayout.createSequentialGroup()
-                        .addGroup(left_SidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(left_SidePanelLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel4))
-                            .addGroup(left_SidePanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnNovel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(left_SidePanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(left_SidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, left_SidePanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(left_SidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnHome1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(left_SidePanelLayout.createSequentialGroup()
-                                .addGroup(left_SidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnMember, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnGenre, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                    .addComponent(btnNovel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(left_SidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnHome1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnMember, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGenre, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(left_SidePanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         left_SidePanelLayout.setVerticalGroup(
             left_SidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(left_SidePanelLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(33, 33, 33)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(46, 46, 46)
                 .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,23 +218,22 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(btnGenre, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnUser, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         background.add(left_SidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 600));
 
         header.setBackground(new java.awt.Color(255, 255, 255));
 
-        exit.setFont(new java.awt.Font("Perpetua Titling MT", 1, 36)); // NOI18N
-        exit.setText("X");
-        exit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        exit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        exit.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLogout.setFont(new java.awt.Font("Perpetua Titling MT", 1, 14)); // NOI18N
+        btnLogout.setText("Log Out");
+        btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 OnClick(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                exitMouseEntered(evt);
             }
         });
 
@@ -237,12 +242,16 @@ public class Home extends javax.swing.JFrame {
         headerLayout.setHorizontalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
-                .addGap(0, 590, Short.MAX_VALUE)
-                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(555, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addContainerGap())
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exit)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addContainerGap())
         );
 
         background.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 630, 40));
@@ -413,42 +422,13 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void OnClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OnClick
-        System.exit(0);
+        dispose();
+        new Login().setVisible(true);
     }//GEN-LAST:event_OnClick
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
-        try{
-            //clearing
-            main.removeAll();
-            main.repaint();
-            main.revalidate();
-            //adding a panel
-            main.add(home_page);
-            main.repaint();
-            main.revalidate();
-        }catch(Exception e){
-            
-        }
+        //
     }//GEN-LAST:event_jLabel4MousePressed
-
-    private void btnMemberMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMemberMousePressed
-        try{
-            //clearing
-            main.removeAll();
-            main.repaint();
-            main.revalidate();
-            //adding a panel
-            main.add(mdMember_page);
-            main.repaint();
-            main.revalidate();
-        }catch(Exception e){
-            
-        }
-    }//GEN-LAST:event_btnMemberMousePressed
-
-    private void exitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_exitMouseEntered
 
     private void btnHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseClicked
         // TODO add your handling code here:
@@ -464,13 +444,24 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUserMouseClicked
 
     private void btnNovelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNovelMousePressed
-        // TODO add your handling code here:
+        dispose();
+        new MasterNovel(authUser).setVisible(true);
     }//GEN-LAST:event_btnNovelMousePressed
 
     private void btnGenreMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenreMousePressed
         dispose();
         new MasterGenre(authUser).setVisible(true);
     }//GEN-LAST:event_btnGenreMousePressed
+
+    private void btnMemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMemberMouseClicked
+        dispose();
+        new MasterMember(authUser).setVisible(true);
+    }//GEN-LAST:event_btnMemberMouseClicked
+
+    private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
+        dispose();
+        new MasterLog(authUser).setVisible(true);
+    }//GEN-LAST:event_btnLogMouseClicked
 
     /**
      * Checking the user's type
@@ -481,6 +472,7 @@ public class Home extends javax.swing.JFrame {
         
         if(authUser.getRole().equals("Pegawai")){
             btnUser.setVisible(false);
+            btnLog.setVisible(false);
         }
     }
     
@@ -527,10 +519,11 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel btnGenre;
     private javax.swing.JPanel btnHome;
     private javax.swing.JPanel btnHome1;
+    private javax.swing.JPanel btnLog;
+    private javax.swing.JLabel btnLogout;
     private javax.swing.JPanel btnMember;
     private javax.swing.JPanel btnNovel;
     private javax.swing.JPanel btnUser;
-    private javax.swing.JLabel exit;
     private javax.swing.JPanel footer;
     private javax.swing.JPanel header;
     private javax.swing.JPanel home_page;
@@ -540,6 +533,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
