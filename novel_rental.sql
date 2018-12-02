@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 01, 2018 at 02:45 AM
+-- Generation Time: Dec 02, 2018 at 11:22 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.7
 
@@ -34,6 +34,16 @@ CREATE TABLE `genre` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Triggers `genre`
+--
+DELIMITER $$
+CREATE TRIGGER `before_genre_update` BEFORE UPDATE ON `genre` FOR EACH ROW BEGIN
+SET NEW.updated_at = NOW();
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -76,6 +86,16 @@ CREATE TABLE `member` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Triggers `member`
+--
+DELIMITER $$
+CREATE TRIGGER `before_update_member` BEFORE UPDATE ON `member` FOR EACH ROW BEGIN
+	SET NEW.updated_at = NOW();
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -136,8 +156,8 @@ CREATE TABLE `peminjaman_novel` (
   `id` int(11) NOT NULL,
   `peminjaman_id` int(11) NOT NULL,
   `novel_id` int(11) NOT NULL,
-  `tanggal_kembali` date NOT NULL,
-  `denda` int(11) NOT NULL
+  `tanggal_kembali` date DEFAULT NULL,
+  `denda` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -172,6 +192,16 @@ CREATE TABLE `user` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Triggers `user`
+--
+DELIMITER $$
+CREATE TRIGGER `before_user_update` BEFORE UPDATE ON `user` FOR EACH ROW BEGIN
+	SET NEW.updated_at = NOW();
+END
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
