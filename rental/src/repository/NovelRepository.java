@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Genre;
 import model.Novel;
 
 public class NovelRepository {
@@ -55,9 +56,32 @@ public class NovelRepository {
                 String status = result.getString(11);
                 String createdAt = result.getString(12);
                 String updatedAt = result.getString(13);
-    
+                
                 Novel novel = new Novel(novelId, title, author, language, publisher, publicationDate, rentPrice, pages, isbn,
                                         kondisi, status, createdAt, updatedAt); 
+                
+                ArrayList<Genre> genres = new ArrayList<>();
+                //Novel genre query statement
+                String query = "SELECT genre.* FROM novel_genre INNER JOIN genre ON novel_genre.genre_id = genre.id WHERE novel_id = ?";
+
+                //Create mysql prepared statement
+                PreparedStatement preparedStatement = con.prepareStatement(query);
+                preparedStatement.setInt(1, novelId);
+                
+                if(preparedStatement.execute()){
+                    ResultSet genreResult = preparedStatement.getResultSet();
+                    
+                    while(genreResult.next()){
+                        int genreId = genreResult.getInt(1);
+                        String name = genreResult.getString(2);
+                        String created = genreResult.getString(3);
+                        String updated = genreResult.getString(4);
+                        
+                        genres.add(new Genre(genreId, name, created, updated));
+                    }
+                    
+                    novel.setGenres(genres);
+                }
                 
                 novels.add(novel);
             }
@@ -116,6 +140,29 @@ public class NovelRepository {
 
                 novel = new Novel(novelId, title, author, language, publisher, publicationDate, rentPrice, pages, isbn,
                                         kondisi, status, createdAt, updatedAt);
+                
+                ArrayList<Genre> genres = new ArrayList<>();
+                //Novel genre query statement
+                String genreQuery = "SELECT genre.* FROM novel_genre INNER JOIN genre ON novel_genre.genre_id = genre.id WHERE novel_id = ?";
+
+                //Create mysql prepared statement
+                PreparedStatement genrePreparedStatement = con.prepareStatement(genreQuery);
+                genrePreparedStatement.setInt(1, novelId);
+                
+                if(genrePreparedStatement.execute()){
+                    ResultSet genreResult = genrePreparedStatement.getResultSet();
+                    
+                    while(genreResult.next()){
+                        int genreId = genreResult.getInt(1);
+                        String name = genreResult.getString(2);
+                        String created = genreResult.getString(3);
+                        String updated = genreResult.getString(4);
+                        
+                        genres.add(new Genre(genreId, name, created, updated));
+                    }
+                    
+                    novel.setGenres(genres);
+                }
             }
             
             con.close();
@@ -124,6 +171,84 @@ public class NovelRepository {
         }
         
         return novel;
+    }
+    
+    /**
+     * Find novel by title from storage
+     * 
+     * @param id int
+     * @return Novel
+     */
+    public static ArrayList<Novel> findByTitle(String keyword){
+        setConnection();
+        
+        ArrayList<Novel> novels = new ArrayList<>();
+        
+        try{
+            Statement statement = con.createStatement();
+            
+            //Query statement
+            String query = "SELECT novel.id, title, author, language, publisher, publication_date, rent_price, pages, isbn, " + 
+                            "kondisi.name, status, created_at, updated_at FROM novel " +
+                            "INNER JOIN kondisi ON novel.kondisi_id = kondisi.id " +
+                            "WHERE novel.title LIKE ?";
+            
+            //Create mysql prepared statement
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, "%"+keyword+"%");
+            
+            //Execute the prepared statement
+            ResultSet result = preparedStatement.executeQuery();
+                
+            while(result.next()){
+                int novelId = result.getInt(1);
+                String title = result.getString(2);
+                String author = result.getString(3);
+                String language = result.getString(4);
+                String publisher = result.getString(5);
+                String publicationDate = result.getString(6);
+                int rentPrice = result.getInt(7);
+                int pages = result.getInt(8);
+                String isbn = result.getString(9);
+                String kondisi = result.getString(10);
+                String status = result.getString(11);
+                String createdAt = result.getString(12);
+                String updatedAt = result.getString(13);
+
+                Novel novel = new Novel(novelId, title, author, language, publisher, publicationDate, rentPrice, pages, isbn,
+                                        kondisi, status, createdAt, updatedAt);
+                
+                ArrayList<Genre> genres = new ArrayList<>();
+                //Novel genre query statement
+                String genreQuery = "SELECT genre.* FROM novel_genre INNER JOIN genre ON novel_genre.genre_id = genre.id WHERE novel_id = ?";
+
+                //Create mysql prepared statement
+                PreparedStatement genrePreparedStatement = con.prepareStatement(genreQuery);
+                genrePreparedStatement.setInt(1, novelId);
+                
+                if(genrePreparedStatement.execute()){
+                    ResultSet genreResult = genrePreparedStatement.getResultSet();
+                    
+                    while(genreResult.next()){
+                        int genreId = genreResult.getInt(1);
+                        String name = genreResult.getString(2);
+                        String created = genreResult.getString(3);
+                        String updated = genreResult.getString(4);
+                        
+                        genres.add(new Genre(genreId, name, created, updated));
+                    }
+                    
+                    novel.setGenres(genres);
+                }    
+                
+                novels.add(novel);
+            }
+            con.close();
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return novels;
     }
     
     /**
@@ -138,12 +263,12 @@ public class NovelRepository {
         try{
             Statement statement = con.createStatement();
             
-            //Query statement
-            String query = "INSERT INTO novel (title, author, language, publisher, publication_date, rent_price, "
+            //Novel query statement
+            String novelQuery = "INSERT INTO novel (title, author, language, publisher, publication_date, rent_price, "
                     + "pages, ISBN, kondisi_id, status) VALUES (?,?,?,?,?,?,?,?,?,?)";
             
             //Create mysql prepared statement
-            PreparedStatement preparedStatement = con.prepareStatement(query);
+            PreparedStatement preparedStatement = con.prepareStatement(novelQuery, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, novel.getTitle());
             preparedStatement.setString(2, novel.getAuthor());
             preparedStatement.setString(3, novel.getLanguage());
@@ -153,10 +278,10 @@ public class NovelRepository {
             preparedStatement.setInt(7, novel.getPages());
             preparedStatement.setString(8, novel.getIsbn());
             switch(novel.getKondisi()){
-                case "bagus":
+                case "Bagus":
                     preparedStatement.setInt(9, 1);
                     break;
-                case "rusak":
+                case "Rusak":
                     preparedStatement.setInt(9, 2);
                     break;
                 default:
@@ -166,7 +291,29 @@ public class NovelRepository {
             
             //Execute the query
             if(preparedStatement.executeUpdate() > 0){
+                int novelId = 0;
+                
+                ResultSet result = preparedStatement.getGeneratedKeys();
+                if(result.next()){
+                    novelId = result.getInt(1);
+                }
+                
+                ArrayList<Genre> genres = novel.getGenres();
+                
+                for(int i = 0; i < genres.size(); i++){
+                    //Query statement
+                    String genreQuery = "INSERT INTO novel_genre (novel_id, genre_id) VALUES (?,?)";
+
+                    //Create mysql prepared statement
+                    PreparedStatement genrePreparedStatement = con.prepareStatement(genreQuery);
+                    genrePreparedStatement.setInt(1, novelId);
+                    genrePreparedStatement.setInt(2, genres.get(i).getId());
+                    
+                    genrePreparedStatement.executeUpdate();
+                }
+                
                 return true;
+                
             }
         } catch (SQLException e){
             System.out.println(e.getMessage());
@@ -203,10 +350,10 @@ public class NovelRepository {
             preparedStatement.setInt(7, novel.getPages());
             preparedStatement.setString(8, novel.getIsbn());
             switch(novel.getKondisi()){
-                case "bagus":
+                case "Bagus":
                     preparedStatement.setInt(9, 1);
                     break;
-                case "rusak":
+                case "Rusak":
                     preparedStatement.setInt(9, 2);
                     break;
                 default:
@@ -216,6 +363,28 @@ public class NovelRepository {
             preparedStatement.setInt(11, id);
             
             if(preparedStatement.executeUpdate() > 0){
+                //Delete genre query statement
+                String deleteGenreQuery = "DELETE FROM novel_genre WHERE novel_id = ?";
+                
+                //Create mysql prepared statement
+                PreparedStatement deletePreparedStatement = con.prepareStatement(deleteGenreQuery);
+                deletePreparedStatement.setInt(1, id);
+                deletePreparedStatement.executeUpdate();
+                
+                ArrayList<Genre> genres = novel.getGenres();
+                
+                for(int i = 0; i < genres.size(); i++){
+                    //Query statement
+                    String genreQuery = "INSERT INTO novel_genre (novel_id, genre_id) VALUES (?,?)";
+
+                    //Create mysql prepared statement
+                    PreparedStatement genrePreparedStatement = con.prepareStatement(genreQuery);
+                    genrePreparedStatement.setInt(1, id);
+                    genrePreparedStatement.setInt(2, genres.get(i).getId());
+                    
+                    genrePreparedStatement.executeUpdate();
+                }
+                
                 return true;
             }
         } catch (SQLException e){
@@ -244,7 +413,15 @@ public class NovelRepository {
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, id);
             
-            if(preparedStatement.executeUpdate() > 0){
+            if(preparedStatement.executeUpdate() > 0){                
+                //Delete genre query statement
+                String deleteGenreQuery = "DELETE FROM novel_genre WHERE novel_id = ?";
+                
+                //Create mysql prepared statement
+                PreparedStatement deletePreparedStatement = con.prepareStatement(deleteGenreQuery);
+                deletePreparedStatement.setInt(1, id);
+                deletePreparedStatement.executeUpdate();
+                
                 return true;
             }
         } catch (SQLException e) {
