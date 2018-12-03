@@ -68,6 +68,7 @@ public class MasterMember extends javax.swing.JFrame {
         dateDob = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setBackground(new java.awt.Color(236, 233, 221));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -105,6 +106,7 @@ public class MasterMember extends javax.swing.JFrame {
         jLabel1.setText("ID:");
 
         txtId.setEditable(false);
+        txtId.setBackground(new java.awt.Color(185, 185, 185));
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);
@@ -144,12 +146,12 @@ public class MasterMember extends javax.swing.JFrame {
         txtAddress.setTabSize(5);
         txtAddress.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtAddress.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 txtAddressAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         jScrollPane2.setViewportView(txtAddress);
@@ -194,12 +196,12 @@ public class MasterMember extends javax.swing.JFrame {
 
         dateDob.setDateFormatString("yyyy-MM-dd");
         dateDob.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 dateDobAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 

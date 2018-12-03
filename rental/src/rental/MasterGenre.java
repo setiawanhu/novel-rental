@@ -51,6 +51,7 @@ public class MasterGenre extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setBackground(new java.awt.Color(236, 233, 221));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -84,6 +85,7 @@ public class MasterGenre extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblGenre);
 
         txtId.setEditable(false);
+        txtId.setBackground(new java.awt.Color(185, 185, 185));
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);

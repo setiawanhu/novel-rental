@@ -97,6 +97,7 @@ public class MasterNovel extends javax.swing.JFrame {
         cmbStatus = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setBackground(new java.awt.Color(236, 233, 221));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -124,6 +125,7 @@ public class MasterNovel extends javax.swing.JFrame {
         jLabel1.setText("ID:");
 
         txtId.setEditable(false);
+        txtId.setBackground(new java.awt.Color(185, 185, 185));
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -180,12 +182,12 @@ public class MasterNovel extends javax.swing.JFrame {
 
         datePubDate.setDateFormatString("yyyy-MM-dd");
         datePubDate.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 datePubDateAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 

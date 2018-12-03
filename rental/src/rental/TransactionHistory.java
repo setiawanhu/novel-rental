@@ -61,6 +61,7 @@ public class TransactionHistory extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHistory = new javax.swing.JTable();
 
+        frameDetail.setBackground(new java.awt.Color(236, 233, 221));
         frameDetail.setSize(new java.awt.Dimension(954, 631));
 
         tblDetail.setModel(new javax.swing.table.DefaultTableModel(
@@ -160,6 +161,7 @@ public class TransactionHistory extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setBackground(new java.awt.Color(236, 233, 221));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);

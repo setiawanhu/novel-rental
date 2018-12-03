@@ -74,6 +74,7 @@ public class MasterUser extends javax.swing.JFrame {
         btmSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setBackground(new java.awt.Color(236, 233, 221));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -106,6 +107,7 @@ public class MasterUser extends javax.swing.JFrame {
         jLabel1.setText("ID:");
 
         txtId.setEditable(false);
+        txtId.setBackground(new java.awt.Color(185, 185, 185));
 
         jLabel2.setText("Name:");
 

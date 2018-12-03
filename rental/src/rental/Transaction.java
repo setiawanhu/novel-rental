@@ -76,6 +76,7 @@ public class Transaction extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtMemberName = new javax.swing.JTextField();
 
+        frameSelectNovel.setBackground(new java.awt.Color(236, 233, 221));
         frameSelectNovel.setPreferredSize(new java.awt.Dimension(932, 700));
         frameSelectNovel.setSize(new java.awt.Dimension(932, 700));
 
@@ -123,6 +124,7 @@ public class Transaction extends javax.swing.JFrame {
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
+        frameSelectMember.setBackground(new java.awt.Color(236, 233, 221));
         frameSelectMember.setSize(new java.awt.Dimension(743, 469));
 
         tblMember.setModel(new javax.swing.table.DefaultTableModel(
@@ -175,6 +177,7 @@ public class Transaction extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setBackground(new java.awt.Color(236, 233, 221));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);

@@ -73,6 +73,7 @@ public class TransactionReturn extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
 
+        frameDetail.setBackground(new java.awt.Color(236, 233, 221));
         frameDetail.setSize(new java.awt.Dimension(919, 600));
         frameDetail.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -196,6 +197,7 @@ public class TransactionReturn extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setBackground(new java.awt.Color(236, 233, 221));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);

@@ -72,11 +72,11 @@ public class Home extends javax.swing.JFrame {
         background.setBackground(new java.awt.Color(153, 153, 153));
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        left_SidePanel.setBackground(new java.awt.Color(0, 153, 255));
+        left_SidePanel.setBackground(new java.awt.Color(236, 233, 221));
 
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setFont(new java.awt.Font("Haettenschweiler", 0, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(java.awt.Color.gray);
         jLabel4.setText("RentalNovel");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -84,7 +84,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        btnMember.setBackground(new java.awt.Color(102, 255, 255));
+        btnMember.setBackground(new java.awt.Color(212, 206, 180));
         btnMember.setForeground(new java.awt.Color(255, 255, 255));
         btnMember.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -98,7 +98,7 @@ public class Home extends javax.swing.JFrame {
         jLabel1.setText("Master Data Member");
         btnMember.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 190, 30));
 
-        btnHome.setBackground(new java.awt.Color(102, 255, 255));
+        btnHome.setBackground(new java.awt.Color(212, 206, 180));
         btnHome.setForeground(new java.awt.Color(255, 255, 255));
         btnHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -112,7 +112,7 @@ public class Home extends javax.swing.JFrame {
         jLabel5.setText("Transaction");
         btnHome.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 170, 30));
 
-        btnUser.setBackground(new java.awt.Color(102, 255, 255));
+        btnUser.setBackground(new java.awt.Color(212, 206, 180));
         btnUser.setForeground(new java.awt.Color(255, 255, 255));
         btnUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -126,7 +126,7 @@ public class Home extends javax.swing.JFrame {
         jLabel12.setText("Master Data User");
         btnUser.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 170, 30));
 
-        btnHistory.setBackground(new java.awt.Color(102, 255, 255));
+        btnHistory.setBackground(new java.awt.Color(212, 206, 180));
         btnHistory.setForeground(new java.awt.Color(255, 255, 255));
         btnHistory.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -140,7 +140,7 @@ public class Home extends javax.swing.JFrame {
         jLabel13.setText("Transaction History");
         btnHistory.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 170, 30));
 
-        btnNovel.setBackground(new java.awt.Color(102, 255, 255));
+        btnNovel.setBackground(new java.awt.Color(212, 206, 180));
         btnNovel.setForeground(new java.awt.Color(255, 255, 255));
         btnNovel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -154,7 +154,7 @@ public class Home extends javax.swing.JFrame {
         jLabel2.setText("Master Data Novel");
         btnNovel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 190, 30));
 
-        btnGenre.setBackground(new java.awt.Color(102, 255, 255));
+        btnGenre.setBackground(new java.awt.Color(212, 206, 180));
         btnGenre.setForeground(new java.awt.Color(255, 255, 255));
         btnGenre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -168,7 +168,7 @@ public class Home extends javax.swing.JFrame {
         jLabel14.setText("Master Data Genre");
         btnGenre.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 190, 30));
 
-        btnLog.setBackground(new java.awt.Color(102, 255, 255));
+        btnLog.setBackground(new java.awt.Color(212, 206, 180));
         btnLog.setForeground(new java.awt.Color(255, 255, 255));
         btnLog.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -182,7 +182,7 @@ public class Home extends javax.swing.JFrame {
         jLabel15.setText("Logs");
         btnLog.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 170, 30));
 
-        btnReturn.setBackground(new java.awt.Color(102, 255, 255));
+        btnReturn.setBackground(new java.awt.Color(212, 206, 180));
         btnReturn.setForeground(new java.awt.Color(255, 255, 255));
         btnReturn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -253,9 +253,10 @@ public class Home extends javax.swing.JFrame {
 
         background.add(left_SidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 670));
 
-        header.setBackground(new java.awt.Color(255, 255, 255));
+        header.setBackground(new java.awt.Color(236, 233, 221));
 
         btnLogout.setFont(new java.awt.Font("Perpetua Titling MT", 1, 14)); // NOI18N
+        btnLogout.setForeground(java.awt.Color.gray);
         btnLogout.setText("Log Out");
         btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogout.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -287,7 +288,7 @@ public class Home extends javax.swing.JFrame {
         main.setBackground(new java.awt.Color(255, 255, 255));
         main.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        home_page.setBackground(new java.awt.Color(204, 204, 255));
+        home_page.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
         jLabel6.setFont(new java.awt.Font("Haettenschweiler", 0, 72)); // NOI18N
@@ -308,7 +309,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(home_pageLayout.createSequentialGroup()
                 .addGap(92, 92, 92)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(416, Short.MAX_VALUE))
+                .addContainerGap(422, Short.MAX_VALUE))
         );
 
         main.add(home_page, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 590));
@@ -396,15 +397,15 @@ public class Home extends javax.swing.JFrame {
         footer.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel7.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel7.setForeground(java.awt.Color.gray);
         jLabel7.setText("| 2018 RentalNovel");
 
         jLabel8.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel8.setForeground(java.awt.Color.gray);
         jLabel8.setText("| About Us");
 
         lblName.setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
-        lblName.setForeground(new java.awt.Color(0, 153, 255));
+        lblName.setForeground(java.awt.Color.gray);
         lblName.setText("Name");
 
         javax.swing.GroupLayout footerLayout = new javax.swing.GroupLayout(footer);
